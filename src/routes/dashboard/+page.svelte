@@ -115,32 +115,34 @@
 	gap: 0.75rem;
 }
 
-/* ── Card — LIQUID GLASS iOS 26 ─────────────────────────────────────────── */
+/* ── Card — LIQUID GLASS MÁS TRANSPARENTE ─────────────────────────────── */
 .card {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 	padding: 1.25rem;
 	border-radius: 1rem;
-	/* Liquid Glass effect */
-	background: rgba(255, 255, 255, 0.04);
-	backdrop-filter: blur(20px) saturate(180%);
-	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	border: 1px solid rgba(255, 255, 255, 0.08);
+	/* Liquid Glass — más transparente */
+	background: rgba(255, 255, 255, 0.02);
+	backdrop-filter: blur(24px) saturate(200%);
+	-webkit-backdrop-filter: blur(24px) saturate(200%);
+	border: 1px solid rgba(255, 255, 255, 0.06);
 	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.1),
-		0 8px 32px rgba(0, 0, 0, 0.4);
+		inset 0 1px 0 rgba(255, 255, 255, 0.08),
+		inset 0 0 20px rgba(255, 255, 255, 0.01),
+		0 8px 32px rgba(0, 0, 0, 0.5);
 	text-decoration: none;
 	transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
 	transform: translateY(-3px);
-	border-color: rgba(225, 29, 72, 0.3);
+	border-color: rgba(225, 29, 72, 0.25);
 	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.15),
-		0 16px 48px rgba(0, 0, 0, 0.5),
-		0 0 40px -10px rgba(225, 29, 72, 0.15);
+		inset 0 1px 0 rgba(255, 255, 255, 0.12),
+		inset 0 0 30px rgba(255, 255, 255, 0.02),
+		0 16px 48px rgba(0, 0, 0, 0.6),
+		0 0 40px -10px rgba(225, 29, 72, 0.1);
 }
 
 .card:hover .card-arrow {
@@ -162,11 +164,11 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: 0.625rem;
-	/* Glass icon container */
-	background: rgba(225, 29, 72, 0.12);
-	border: 1px solid rgba(225, 29, 72, 0.2);
+	/* Glass icon — más transparente */
+	background: rgba(225, 29, 72, 0.08);
+	border: 1px solid rgba(225, 29, 72, 0.15);
 	color: var(--color-crimson-400);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .card-icon svg {
