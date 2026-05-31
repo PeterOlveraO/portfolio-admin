@@ -248,15 +248,16 @@
 	height: 100vh;
 	overflow: hidden;
 	/*
-	 * [design skill] Backgrounds & Visual Details:
-	 * Ruido SVG como textura + gradiente lateral → profundidad sin peso.
-	 * No un color plano — capas.
+	 * [design skill] LIQUID GLASS iOS 26 Style
+	 * Vidrio translúcido flotando sobre el fondo con reflejos internos sutiles.
 	 */
-	background-color: var(--color-coal);
-	background-image:
-		url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
-		linear-gradient(to right, rgba(180,20,41,0.04) 0%, transparent 60%);
-	border-right: 1px solid rgba(255,255,255,0.06);
+	background: rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	border-right: 1px solid rgba(255, 255, 255, 0.06);
+	box-shadow: 
+		inset -1px 0 0 rgba(255, 255, 255, 0.05),
+		4px 0 32px rgba(0, 0, 0, 0.3);
 	transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -267,7 +268,9 @@
 		z-index: 40;
 		transform: translateX(-100%);
 		width: 16rem;
-		box-shadow: 8px 0 40px rgba(0,0,0,0.6);
+		box-shadow: 
+			inset -1px 0 0 rgba(255, 255, 255, 0.05),
+			8px 0 48px rgba(0, 0, 0, 0.7);
 	}
 	.sidebar--open { transform: translateX(0); }
 }
@@ -394,24 +397,31 @@
 	align-items: center;
 	gap: 0.625rem;
 	padding: 0.5rem 0.75rem 0.5rem 0.875rem;
-	border-radius: 0.375rem;
+	border-radius: 0.5rem;
 	font-size: 0.8125rem;
 	font-weight: 400;
 	color: var(--text-muted);
 	text-decoration: none;
-	transition: background 0.12s ease, color 0.12s ease;
+	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 	overflow: hidden;
+	border: 1px solid transparent;
 }
 
 .nav-item:hover:not(.nav-item--active) {
-	background: rgba(255,255,255,0.04);
+	background: rgba(255, 255, 255, 0.05);
+	border-color: rgba(255, 255, 255, 0.06);
 	color: var(--color-vapor);
 }
 
+/* [LIQUID GLASS] Item activo con glass crimson */
 .nav-item--active {
-	background: rgba(180,20,41,0.1);
+	background: rgba(225, 29, 72, 0.15);
+	border: 1px solid rgba(225, 29, 72, 0.3);
 	color: var(--color-crimson-200);
 	font-weight: 500;
+	box-shadow: 
+		inset 0 1px 0 rgba(255, 255, 255, 0.08),
+		0 2px 8px rgba(225, 29, 72, 0.1);
 }
 
 /* Barra izquierda sobre la accent line — indicador activo preciso */
@@ -517,16 +527,16 @@
 	gap: 0.75rem;
 	height: 3.25rem;
 	padding: 0 1.5rem;
-	border-bottom: 1px solid rgba(255,255,255,0.06);
 	/*
-	 * [design] Topbar con micro-gradiente ascendente — no plano.
-	 * Crea separación visual sutil sin borde grueso.
+	 * [LIQUID GLASS] Navbar con glassmorphism
 	 */
-	background: linear-gradient(
-		to bottom,
-		var(--color-graphite) 0%,
-		var(--color-coal) 100%
-	);
+	background: rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	box-shadow: 
+		inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+		0 4px 24px rgba(0, 0, 0, 0.2);
 	flex-shrink: 0;
 }
 
@@ -607,21 +617,25 @@
 	align-items: center;
 	gap: 0.375rem;
 	padding: 0.375rem 0.75rem;
-	border-radius: 0.4375rem;
+	border-radius: 0.5rem;
 	font-size: 0.75rem;
 	font-weight: 500;
 	font-family: var(--font-sans);
 	color: var(--text-muted);
-	background: rgba(255,255,255,0.04);
-	border: 1px solid rgba(255,255,255,0.08);
+	/* [LIQUID GLASS] Botón glass con borde sutil */
+	background: rgba(255, 255, 255, 0.04);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 	cursor: pointer;
-	transition: background 0.12s, color 0.12s, border-color 0.12s;
+	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 	white-space: nowrap;
 }
 .logout-btn:hover {
-	background: rgba(180,20,41,0.08);
+	background: rgba(225, 29, 72, 0.1);
 	color: var(--color-crimson-200);
-	border-color: rgba(180,20,41,0.2);
+	border-color: rgba(225, 29, 72, 0.3);
 }
 
 @media (max-width: 479px) { .logout-label { display: none; } }
