@@ -1,0 +1,152 @@
+/**
+ * app.css — Sistema de diseño global
+ * Paleta: negro carbón + rojo carmesí frío · Estética: liquidglass minimalista refinada
+ * Tipografía: Playfair Display (display) + DM Sans (body)
+ */
+@import 'tailwindcss';
+
+/* ── Design tokens ────────────────────────────────────────────────────────── */
+@theme {
+	/* Negro/grises: de puro negro a niebla oscura */
+	--color-void:      #000000;
+	--color-onyx:      #080808;
+	--color-obsidian:  #0f0f0f;
+	--color-coal:      #161616;
+	--color-graphite:  #1e1e1e;
+	--color-ash:       #2a2a2a;
+	--color-mist:      #3d3d3d;
+	--color-smoke:     #6b6b6b;
+	--color-fog:       #9a9a9a;
+	--color-vapor:     #c8c8c8;
+	--color-ghost:     #e8e8e8;
+
+	/* Rojo carmesí frío — acento único */
+	--color-crimson-900: #1a0205;
+	--color-crimson-800: #2e0408;
+	--color-crimson-700: #4a060d;
+	--color-crimson-600: #6b0a14;
+	--color-crimson-500: #920f1d;
+	--color-crimson-400: #b91429;
+	--color-crimson-300: #d4263b;
+	--color-crimson-200: #e85568;
+	--color-crimson-100: #f4a0ac;
+	--color-crimson-50:  #fde8eb;
+
+	/* Superficie liquidglass */
+	--color-glass-weak:    rgba(255, 255, 255, 0.03);
+	--color-glass-soft:    rgba(255, 255, 255, 0.06);
+	--color-glass-mid:     rgba(255, 255, 255, 0.09);
+	--color-glass-strong:  rgba(255, 255, 255, 0.13);
+	--color-glass-border:  rgba(255, 255, 255, 0.08);
+	--color-glass-border-crimson: rgba(180, 20, 41, 0.35);
+
+	/* Tipografía */
+	--font-display: 'Playfair Display', Georgia, serif;
+	--font-sans:    'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+	/* Spacing / radios adicionales */
+	--radius-glass: 1.25rem;
+}
+
+/* ── Variables CSS globales ───────────────────────────────────────────────── */
+:root {
+	--bg-base:       var(--color-obsidian);
+	--bg-surface:    var(--color-coal);
+	--bg-elevated:   var(--color-graphite);
+	--accent:        var(--color-crimson-400);
+	--accent-glow:   rgba(180, 20, 41, 0.25);
+	--text-primary:  var(--color-ghost);
+	--text-muted:    var(--color-smoke);
+	--text-faint:    var(--color-mist);
+	--border-subtle: var(--color-glass-border);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+	background-color: var(--bg-base);
+	color: var(--text-primary);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Overlay móvil del dashboard ─────────────────────────────────────────── */
+.mobile-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.65);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+	z-index: 39;
+	cursor: pointer;
+}
+
+/* Scrollbar refinada */
+::-webkit-scrollbar        { width: 4px; height: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--color-ash); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Selección con acento carmesí */
+::selection {
+	background: rgba(180, 20, 41, 0.35);
+	color: #fff;
+}
+
+/* ── Utilidades liquidglass ───────────────────────────────────────────────── */
+
+/* Superficie base */
+.glass {
+	background: var(--color-glass-soft);
+	backdrop-filter: blur(20px) saturate(1.4);
+	-webkit-backdrop-filter: blur(20px) saturate(1.4);
+	border: 1px solid var(--border-subtle);
+}
+
+/* Superficie con shimmer interior */
+.glass-shimmer {
+	background:
+		linear-gradient(135deg, var(--color-glass-mid) 0%, var(--color-glass-weak) 100%),
+		var(--color-glass-soft);
+	backdrop-filter: blur(24px) saturate(1.6);
+	-webkit-backdrop-filter: blur(24px) saturate(1.6);
+	border: 1px solid var(--border-subtle);
+}
+
+/* Borde con acento carmesí */
+.glass-crimson {
+	border: 1px solid var(--color-glass-border-crimson);
+	box-shadow: 0 0 0 1px rgba(180, 20, 41, 0.1) inset,
+	            0 4px 32px -8px rgba(0, 0, 0, 0.8);
+}
+
+/* ── Tipografía display ───────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+
+/* ── Animaciones ──────────────────────────────────────────────────────────── */
+@keyframes fade-up {
+	from { opacity: 0; transform: translateY(12px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes crimson-pulse {
+	0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+	50%       { box-shadow: 0 0 20px 4px var(--accent-glow); }
+}
+@keyframes shimmer-slide {
+	from { background-position: -200% center; }
+	to   { background-position: 200% center; }
+}
+
+.animate-fade-up   { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-pulse-red { animation: crimson-pulse 3s ease-in-out infinite; }
+
+/* Stagger helpers */
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
