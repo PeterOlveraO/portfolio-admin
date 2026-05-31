@@ -1,396 +1,202 @@
 /**
- * app.css — Sistema de diseño global
- * Paleta: negro carbón + rojo carmesí frío · Estética: liquidglass minimalista refinada
- * Tipografía: Playfair Display (display) + DM Sans (body)
- * Inspirado en iOS 26 Liquid Glass
+ * app.css — VORTEX CMS Design System adaptado a Portfolio Admin
+ *
+ * [skill: frontend-design]
+ * Tone: Liquid Glass Crimson — obsidiana + rojo Apple (#ff3b30), radios iOS generosos
+ * Differentiation: mesh de gradientes radiales rojos → atmósfera "pantalla de misión"
+ * Typography: Inter (especificado en el diseño VORTEX) — sin-serif moderno y denso
+ * Backgrounds: capas de profundidad → mesh → panel glass → panel anidado
  */
+
+/* ── Fuente Inter (spec VORTEX) ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 
-/* ── Design tokens ────────────────────────────────────────────────────────── */
+/* ── Design tokens ──────────────────────────────────────────────────────── */
 @theme {
-	/* Negro/grises: de puro negro a niebla oscura */
+	/* Neutros oscuros */
 	--color-void:      #000000;
-	--color-onyx:      #080808;
+	--color-onyx:      #050505;
 	--color-obsidian:  #0a0a0a;
-	--color-coal:      #121212;
+	--color-coal:      #111111;
 	--color-graphite:  #1a1a1a;
-	--color-ash:       #262626;
-	--color-mist:      #3d3d3d;
-	--color-smoke:     #6b6b6b;
-	--color-fog:       #9a9a9a;
-	--color-vapor:     #c8c8c8;
-	--color-ghost:     #e8e8e8;
+	--color-ash:       #252525;
+	--color-mist:      #3a3a3a;
+	--color-smoke:     oklch(0.7 0.01 0);
+	--color-fog:       oklch(0.75 0.01 0);
+	--color-vapor:     oklch(0.85 0 0);
+	--color-ghost:     oklch(0.98 0 0);
 
-	/* Rojo carmesí frío — acento único (ajustado a #e11d48) */
-	--color-crimson-900: #1a0205;
-	--color-crimson-800: #2e0408;
-	--color-crimson-700: #4a060d;
-	--color-crimson-600: #7f1d1d;
-	--color-crimson-500: #be123c;
-	--color-crimson-400: #e11d48;
-	--color-crimson-300: #f43f5e;
-	--color-crimson-200: #fb7185;
-	--color-crimson-100: #fda4af;
-	--color-crimson-50:  #ffe4e6;
+	/* Rojo Apple — acento único VORTEX */
+	--color-primary:       oklch(0.65 0.24 27);   /* #ff3b30 aprox. */
+	--color-primary-dim:   oklch(0.55 0.22 27);
+	--color-primary-muted: oklch(0.65 0.24 27 / 10%);
+	--color-primary-glow:  oklch(0.65 0.24 27 / 40%);
 
-	/* Superficie liquidglass — iOS 26 style */
-	--color-glass-weak:    rgba(255, 255, 255, 0.02);
-	--color-glass-soft:    rgba(255, 255, 255, 0.04);
-	--color-glass-mid:     rgba(255, 255, 255, 0.07);
-	--color-glass-strong:  rgba(255, 255, 255, 0.12);
-	--color-glass-border:  rgba(255, 255, 255, 0.08);
-	--color-glass-border-hover: rgba(255, 255, 255, 0.15);
-	--color-glass-border-crimson: rgba(225, 29, 72, 0.3);
+	/* Emerald para pills de estado */
+	--color-emerald-400: oklch(0.79 0.17 155);
+	--color-emerald-bg:  oklch(0.79 0.17 155 / 10%);
 
-	/* Tipografía */
-	--font-display: 'Playfair Display', Georgia, serif;
-	--font-sans:    'DM Sans', ui-sans-serif, system-ui, sans-serif;
+	/* Superficie glass */
+	--color-glass-panel:  rgba(255, 255, 255, 0.04);
+	--color-glass-border: rgba(255, 255, 255, 0.10);
+	--color-glass-shine:  rgba(255, 255, 255, 0.08);
 
-	/* Spacing / radios adicionales — iOS 26 uses larger radii */
-	--radius-glass: 1rem;
-	--radius-glass-lg: 1.25rem;
-	--radius-glass-xl: 1.5rem;
+	/* Tipografía VORTEX — Inter como especificado en el design system */
+	--font-sans:    'Inter', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+	/* Radios generosos estilo iOS */
+	--radius-sm:  0.75rem;  /* rounded-xl */
+	--radius-md:  1rem;     /* rounded-2xl */
+	--radius-lg:  1.5rem;   /* rounded-3xl */
+	--radius-xl:  2rem;     /* rounded-[2rem] */
+	--radius-2xl: 2.5rem;   /* rounded-[2.5rem] */
 }
 
-/* ── Variables CSS globales ───────────────────────────────────────────────── */
+/* ── Variables globales de semántica ────────────────────────────────────── */
 :root {
 	--bg-base:       var(--color-obsidian);
 	--bg-surface:    var(--color-coal);
 	--bg-elevated:   var(--color-graphite);
-	--accent:        var(--color-crimson-400);
-	--accent-glow:   rgba(225, 29, 72, 0.25);
+	--accent:        var(--color-primary);
+	--accent-glow:   var(--color-primary-glow);
 	--text-primary:  var(--color-ghost);
-	--text-muted:    var(--color-smoke);
-	--text-faint:    var(--color-mist);
+	--text-secondary: rgba(255, 255, 255, 0.60);
+	--text-muted:    rgba(255, 255, 255, 0.40);
+	--text-faint:    rgba(255, 255, 255, 0.25);
 	--border-subtle: var(--color-glass-border);
 }
 
-/* ── Base ─────────────────────────────────────────────────────────────────── */
-*, *::before, *::after {
-	box-sizing: border-box;
-}
+/* ── Reset base ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
 html, body {
 	height: 100%;
-	background-color: var(--bg-base);
-	color: var(--text-primary);
 	font-family: var(--font-sans);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	color: var(--text-primary);
+	background-color: var(--color-onyx);
 }
 
-/* 
- * Fondo con textura de ruido + gradientes radiales para profundidad
- * La textura SVG crea un efecto granulado sutil que da vida al fondo oscuro
+/* ── LIQUID MESH — el diferenciador visual del VORTEX design ─────────────
+ * Tres gradientes radiales rojos sobre fondo casi negro.
+ * Crea "atmósfera de misión" sin distracción.
+ * Se aplica al contenedor raíz del dashboard, no al body entero.
  */
-body {
-	background-color: var(--bg-base);
-	background-image: 
-		/* Textura de ruido granulado */
-		url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
-		/* Gradientes radiales rojos para profundidad */
-		radial-gradient(ellipse 80% 60% at 0% 100%, rgba(26, 0, 0, 0.85) 0%, transparent 55%),
-		radial-gradient(ellipse 60% 50% at 100% 0%, rgba(26, 0, 5, 0.5) 0%, transparent 45%),
-		radial-gradient(ellipse 50% 40% at 50% 50%, rgba(225, 29, 72, 0.02) 0%, transparent 60%);
-	background-blend-mode: overlay, normal, normal, normal;
-	background-attachment: fixed;
+.liquid-mesh {
+	background-color: var(--color-onyx);
+	background-image:
+		radial-gradient(at 0% 0%,   rgba(255, 59, 48, 0.18) 0, transparent 50%),
+		radial-gradient(at 100% 100%, rgba(255, 59, 48, 0.12) 0, transparent 50%),
+		radial-gradient(at 50% 50%,  rgba(255, 59, 48, 0.05) 0, transparent 60%);
 }
 
-/* ── Overlay móvil del dashboard ─────────────────────────────────────────── */
+/* ── GLASS PANEL — superficie base del sistema ───────────────────────────
+ * Panel: glass-panel + glass-shine + radius generoso sobre liquid-mesh
+ */
+.glass-panel {
+	background-color: var(--color-glass-panel);
+	backdrop-filter: blur(24px) saturate(160%);
+	-webkit-backdrop-filter: blur(24px) saturate(160%);
+	border: 1px solid var(--color-glass-border);
+}
+
+/* Reflejo interior que simula captación de luz en la superficie del vidrio */
+.glass-shine {
+	background-image: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.08) 0%,
+		rgba(255, 255, 255, 0.00) 50%,
+		rgba(255, 255, 255, 0.04) 100%
+	);
+	box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18);
+}
+
+/* Resplandor ambiental rojo para elementos de acento */
+.red-glow {
+	box-shadow: 0 0 24px rgba(255, 59, 48, 0.40);
+}
+
+/* ── Combinaciones frecuentes ────────────────────────────────────────────── */
+/* Panel completo: glass-panel + glass-shine listos para usar juntos */
+.panel {
+	background-color: var(--color-glass-panel);
+	background-image: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.08) 0%,
+		rgba(255, 255, 255, 0.00) 50%,
+		rgba(255, 255, 255, 0.04) 100%
+	);
+	backdrop-filter: blur(24px) saturate(160%);
+	-webkit-backdrop-filter: blur(24px) saturate(160%);
+	border: 1px solid var(--color-glass-border);
+	box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18);
+}
+
+/* Botón primario rojo sólido con red-glow */
+.btn-primary {
+	background-color: var(--color-primary);
+	color: #fff;
+	border: none;
+	font-weight: 700;
+	font-size: 0.75rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	border-radius: 9999px;
+	cursor: pointer;
+	box-shadow: 0 0 24px rgba(255, 59, 48, 0.40);
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-primary:hover {
+	transform: scale(1.05);
+	box-shadow: 0 0 32px rgba(255, 59, 48, 0.55);
+}
+
+/* ── Overlay móvil ───────────────────────────────────────────────────────── */
 .mobile-overlay {
 	position: fixed;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.65);
+	background: rgba(0, 0, 0, 0.7);
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
 	z-index: 39;
 	cursor: pointer;
 }
 
-/* Scrollbar refinada */
-::-webkit-scrollbar        { width: 5px; height: 5px; }
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track  { background: transparent; }
 ::-webkit-scrollbar-thumb  { background: var(--color-ash); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
 
-/* Selección con acento carmesí */
+/* ── Selección ───────────────────────────────────────────────────────────── */
 ::selection {
-	background: rgba(225, 29, 72, 0.35);
+	background: rgba(255, 59, 48, 0.30);
 	color: #fff;
 }
 
-/* ══════════════════════════════════════════════════════════════════════════ */
-/* ── LIQUID GLASS SYSTEM — iOS 26 Inspired ─────────────────────────────────── */
-/* ══════════════════════════════════════════════════════════════════════════ */
-
-/**
- * El efecto Liquid Glass consiste en:
- * 1. backdrop-filter: blur(20px) saturate(180%) — desenfoque y saturación del fondo
- * 2. background: rgba(255,255,255,0.04) — superficie semi-transparente
- * 3. border: 1px solid rgba(255,255,255,0.08) — borde sutil que captura luz
- * 4. box-shadow: inset 0 1px 0 rgba(255,255,255,0.1) — reflejo interior superior
- * 5. border-radius: 16px — bordes redondeados suaves
- */
-
-/* Superficie base glass — MÁS TRANSPARENTE */
-.glass {
-	background: rgba(255, 255, 255, 0.02);
-	backdrop-filter: blur(24px) saturate(200%);
-	-webkit-backdrop-filter: blur(24px) saturate(200%);
-	border: 1px solid rgba(255, 255, 255, 0.06);
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.08),
-		inset 0 0 20px rgba(255, 255, 255, 0.02),
-		0 8px 32px rgba(0, 0, 0, 0.5);
-	border-radius: var(--radius-glass);
-}
-
-/* Superficie con shimmer interior — más prominente y transparente */
-.glass-shimmer {
-	background:
-		linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-	backdrop-filter: blur(28px) saturate(200%);
-	-webkit-backdrop-filter: blur(28px) saturate(200%);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.12),
-		inset 0 -1px 0 rgba(255, 255, 255, 0.03),
-		inset 0 0 30px rgba(255, 255, 255, 0.02),
-		0 8px 32px rgba(0, 0, 0, 0.6);
-	border-radius: var(--radius-glass);
-}
-
-/* Borde con acento carmesí */
-.glass-crimson {
-	border: 1px solid rgba(225, 29, 72, 0.3);
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.1),
-		0 0 0 1px rgba(225, 29, 72, 0.1) inset,
-		0 8px 32px -8px rgba(0, 0, 0, 0.8),
-		0 0 60px -20px rgba(225, 29, 72, 0.15);
-}
-
-/* Glass activo/seleccionado con acento rojo */
-.glass-active {
-	background: rgba(225, 29, 72, 0.15);
-	border: 1px solid rgba(225, 29, 72, 0.3);
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.08),
-		0 4px 16px rgba(225, 29, 72, 0.1);
-}
-
-/* Glass para inputs */
-.glass-input {
-	background: rgba(0, 0, 0, 0.3);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	border-radius: var(--radius-glass);
-	transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.glass-input:focus {
-	border-color: rgba(225, 29, 72, 0.5);
-	box-shadow: 
-		0 0 0 3px rgba(225, 29, 72, 0.15),
-		inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-/* Glass para cards interactivas — MÁS TRANSPARENTE */
-.glass-card {
-	background: rgba(255, 255, 255, 0.02);
-	backdrop-filter: blur(24px) saturate(200%);
-	-webkit-backdrop-filter: blur(24px) saturate(200%);
-	border: 1px solid rgba(255, 255, 255, 0.06);
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.08),
-		inset 0 0 20px rgba(255, 255, 255, 0.01),
-		0 8px 32px rgba(0, 0, 0, 0.5);
-	border-radius: var(--radius-glass);
-	transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.glass-card:hover {
-	transform: translateY(-2px);
-	border-color: rgba(255, 255, 255, 0.12);
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.12),
-		inset 0 0 30px rgba(255, 255, 255, 0.02),
-		0 16px 48px rgba(0, 0, 0, 0.6);
-}
-
-/* Glass para sidebar — MÁS TRANSPARENTE */
-.glass-sidebar {
-	background: rgba(255, 255, 255, 0.015);
-	backdrop-filter: blur(24px) saturate(200%);
-	-webkit-backdrop-filter: blur(24px) saturate(200%);
-	border-right: 1px solid rgba(255, 255, 255, 0.05);
-	box-shadow: 
-		inset -1px 0 0 rgba(255, 255, 255, 0.03),
-		4px 0 24px rgba(0, 0, 0, 0.4);
-}
-
-/* Glass para navbar/topbar — MÁS TRANSPARENTE */
-.glass-navbar {
-	background: rgba(255, 255, 255, 0.015);
-	backdrop-filter: blur(24px) saturate(200%);
-	-webkit-backdrop-filter: blur(24px) saturate(200%);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-	box-shadow: 
-		inset 0 -1px 0 rgba(255, 255, 255, 0.02),
-		0 4px 24px rgba(0, 0, 0, 0.3);
-}
-
-/* Glass para botón secundario — MÁS TRANSPARENTE */
-.glass-btn {
-	background: rgba(255, 255, 255, 0.02);
-	backdrop-filter: blur(16px);
-	-webkit-backdrop-filter: blur(16px);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-	border-radius: 0.5rem;
-	transition: all 0.15s ease;
-}
-
-.glass-btn:hover {
-	background: rgba(255, 255, 255, 0.05);
-	border-color: rgba(255, 255, 255, 0.12);
-}
-
-/* Glass btn con borde rojo tenue — MÁS TRANSPARENTE */
-.glass-btn-crimson {
-	background: rgba(255, 255, 255, 0.02);
-	backdrop-filter: blur(16px);
-	-webkit-backdrop-filter: blur(16px);
-	border: 1px solid rgba(225, 29, 72, 0.15);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-	border-radius: 0.5rem;
-	transition: all 0.15s ease;
-}
-
-.glass-btn-crimson:hover {
-	background: rgba(225, 29, 72, 0.08);
-	border-color: rgba(225, 29, 72, 0.3);
-}
-
-/* Botón primario rojo sólido */
-.btn-primary-solid {
-	background: linear-gradient(135deg, var(--color-crimson-400) 0%, var(--color-crimson-500) 100%);
-	color: #fff;
-	border: none;
-	border-radius: 0.5rem;
-	font-weight: 600;
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.2),
-		0 4px 16px rgba(225, 29, 72, 0.35);
-	transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.btn-primary-solid:hover {
-	transform: translateY(-1px);
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.25),
-		0 8px 24px rgba(225, 29, 72, 0.45);
-}
-
-/* Glass para filas de tabla */
-.glass-row {
-	background: rgba(255, 255, 255, 0.02);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-	transition: background 0.15s ease;
-}
-
-.glass-row:hover {
-	background: rgba(255, 255, 255, 0.05);
-}
-
-/* Glass para modales — MÁS TRANSPARENTE */
-.glass-modal {
-	background: rgba(18, 18, 18, 0.7);
-	backdrop-filter: blur(40px) saturate(200%);
-	-webkit-backdrop-filter: blur(40px) saturate(200%);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	box-shadow: 
-		inset 0 1px 0 rgba(255, 255, 255, 0.08),
-		inset 0 0 40px rgba(255, 255, 255, 0.02),
-		0 24px 80px rgba(0, 0, 0, 0.8);
-	border-radius: var(--radius-glass-lg);
-}
-
-/* ── Tipografía display ───────────────────────────────────────────────────── */
-.font-display { font-family: var(--font-display); }
-
-/* ══════════════════════════════════════════════════════════════════════════ */
-/* ── ANIMATIONS ────────────────────────────────────────────────────────────── */
-/* ══════════════════════════════════════════════════════════════════════════ */
-
-@keyframes fade-up {
-	from { opacity: 0; transform: translateY(12px); }
-	to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fade-in {
-	from { opacity: 0; }
-	to   { opacity: 1; }
-}
-
-@keyframes scale-in {
-	from { opacity: 0; transform: scale(0.95); }
-	to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes crimson-pulse {
-	0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
-	50%       { box-shadow: 0 0 20px 4px var(--accent-glow); }
-}
-
-@keyframes shimmer-slide {
-	from { background-position: -200% center; }
-	to   { background-position: 200% center; }
-}
-
-@keyframes glass-glow {
-	0%, 100% { 
-		box-shadow: 
-			inset 0 1px 0 rgba(255, 255, 255, 0.1),
-			0 8px 32px rgba(0, 0, 0, 0.4);
-	}
-	50% { 
-		box-shadow: 
-			inset 0 1px 0 rgba(255, 255, 255, 0.15),
-			0 8px 32px rgba(0, 0, 0, 0.4),
-			0 0 40px -10px rgba(225, 29, 72, 0.2);
-	}
-}
-
-.animate-fade-up   { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.animate-fade-in   { animation: fade-in 0.3s ease-out both; }
-.animate-scale-in  { animation: scale-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.animate-pulse-red { animation: crimson-pulse 3s ease-in-out infinite; }
-.animate-glass-glow { animation: glass-glow 4s ease-in-out infinite; }
-
-/* Stagger helpers */
-.delay-1 { animation-delay: 0.08s; }
-.delay-2 { animation-delay: 0.16s; }
-.delay-3 { animation-delay: 0.24s; }
-.delay-4 { animation-delay: 0.32s; }
-.delay-5 { animation-delay: 0.40s; }
-.delay-6 { animation-delay: 0.48s; }
-
-/* ══════════════════════════════════════════════════════════════════════════ */
-/* ── UTILITIES ─────────────────────────────────────────────────────────────── */
-/* ══════════════════════════════════════════════════════════════════════════ */
-
-/* Placeholder para secciones en construcción */
+/* ── Placeholders ────────────────────────────────────────────────────────── */
 .section-placeholder {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	min-height: 300px;
 	padding: 2rem;
-}
-
-.section-placeholder p {
 	color: var(--text-muted);
 	font-size: 0.875rem;
 }
+
+/* ── Animaciones ─────────────────────────────────────────────────────────── */
+@keyframes pulse-dot {
+	0%, 100% { opacity: 1; }
+	50%       { opacity: 0.3; }
+}
+@keyframes fade-up {
+	from { opacity: 0; transform: translateY(10px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-fade-up   { animation: fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
