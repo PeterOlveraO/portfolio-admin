@@ -560,53 +560,7 @@
 		flex-shrink: 0;
 	}
 
-	/* ── Footer sidebar ──────────────────────────────────────────────────────── */
-	.sidebar-footer {
-		flex-shrink: 0;
-		padding: 1rem 1.25rem 1.25rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.06);
-	}
 
-	/* [design] Barra de almacenamiento con bg-primary al 75% + red-glow */
-	.storage-block {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.storage-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.storage-label {
-		font-size: 0.625rem;
-		font-weight: 500;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--text-muted);
-	}
-
-	.storage-pct {
-		font-size: 0.625rem;
-		font-weight: 600;
-		color: var(--color-primary);
-	}
-
-	.storage-track {
-		height: 0.25rem;
-		border-radius: 9999px;
-		background: rgba(255, 255, 255, 0.08);
-		overflow: hidden;
-	}
-
-	.storage-bar {
-		height: 100%;
-		width: 75%;
-		border-radius: 9999px;
-		background: var(--color-primary);
-	}
 
 	/* ── Main col ────────────────────────────────────────────────────────────── */
 	.main-col {
