@@ -168,10 +168,13 @@
 	.login-bg {
 		position: absolute;
 		inset: 0;
+		/* Textura de ruido + gradientes para profundidad */
 		background:
+			url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
 			radial-gradient(ellipse 70% 60% at 15% 85%, rgba(26, 0, 5, 0.9) 0%, transparent 60%),
 			radial-gradient(ellipse 50% 50% at 90% 15%, rgba(26, 0, 5, 0.5) 0%, transparent 50%),
 			radial-gradient(ellipse 40% 30% at 50% 50%, rgba(225, 29, 72, 0.03) 0%, transparent 70%);
+		background-blend-mode: overlay, normal, normal, normal;
 		pointer-events: none;
 	}
 
@@ -184,16 +187,17 @@
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
-		/* LIQUID GLASS — iOS 26 Style */
-		background: rgba(255, 255, 255, 0.04);
-		backdrop-filter: blur(24px) saturate(180%);
-		-webkit-backdrop-filter: blur(24px) saturate(180%);
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		/* LIQUID GLASS — MÁS TRANSPARENTE */
+		background: rgba(255, 255, 255, 0.025);
+		backdrop-filter: blur(32px) saturate(200%);
+		-webkit-backdrop-filter: blur(32px) saturate(200%);
+		border: 1px solid rgba(255, 255, 255, 0.08);
 		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.15),
-			inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1),
+			inset 0 -1px 0 rgba(255, 255, 255, 0.03),
+			inset 0 0 40px rgba(255, 255, 255, 0.02),
 			0 32px 64px -16px rgba(0, 0, 0, 0.9),
-			0 0 80px -20px rgba(225, 29, 72, 0.1);
+			0 0 80px -20px rgba(225, 29, 72, 0.08);
 	}
 
 	.login-header {
@@ -272,11 +276,11 @@
 
 	.field-input {
 		width: 100%;
-		/* LIQUID GLASS input */
-		background: rgba(0, 0, 0, 0.3);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid rgba(255, 255, 255, 0.08);
+		/* LIQUID GLASS input — MÁS TRANSPARENTE */
+		background: rgba(0, 0, 0, 0.2);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(255, 255, 255, 0.06);
 		border-radius: 0.75rem;
 		padding: 0.75rem 1rem;
 		font-size: 0.9375rem;
@@ -290,11 +294,11 @@
 	.field-input::placeholder { color: var(--color-mist); }
 
 	.field-input:focus {
-		border-color: rgba(225, 29, 72, 0.5);
-		background: rgba(0, 0, 0, 0.4);
+		border-color: rgba(225, 29, 72, 0.4);
+		background: rgba(0, 0, 0, 0.3);
 		box-shadow: 
-			0 0 0 3px rgba(225, 29, 72, 0.15),
-			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+			0 0 0 3px rgba(225, 29, 72, 0.1),
+			inset 0 1px 0 rgba(255, 255, 255, 0.03);
 	}
 
 	.field-input--error {

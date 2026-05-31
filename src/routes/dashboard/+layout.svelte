@@ -248,16 +248,17 @@
 	height: 100vh;
 	overflow: hidden;
 	/*
-	 * [design skill] LIQUID GLASS iOS 26 Style
-	 * Vidrio translúcido flotando sobre el fondo con reflejos internos sutiles.
+	 * [design skill] LIQUID GLASS — MÁS TRANSPARENTE
+	 * Vidrio translúcido flotando sobre el fondo texturizado.
 	 */
-	background: rgba(255, 255, 255, 0.03);
-	backdrop-filter: blur(20px) saturate(180%);
-	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	border-right: 1px solid rgba(255, 255, 255, 0.06);
+	background: rgba(255, 255, 255, 0.015);
+	backdrop-filter: blur(28px) saturate(200%);
+	-webkit-backdrop-filter: blur(28px) saturate(200%);
+	border-right: 1px solid rgba(255, 255, 255, 0.05);
 	box-shadow: 
-		inset -1px 0 0 rgba(255, 255, 255, 0.05),
-		4px 0 32px rgba(0, 0, 0, 0.3);
+		inset -1px 0 0 rgba(255, 255, 255, 0.03),
+		inset 0 0 30px rgba(255, 255, 255, 0.01),
+		4px 0 32px rgba(0, 0, 0, 0.4);
 	transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -528,15 +529,15 @@
 	height: 3.25rem;
 	padding: 0 1.5rem;
 	/*
-	 * [LIQUID GLASS] Navbar con glassmorphism
+	 * [LIQUID GLASS] Navbar — MÁS TRANSPARENTE
 	 */
-	background: rgba(255, 255, 255, 0.03);
-	backdrop-filter: blur(20px) saturate(180%);
-	-webkit-backdrop-filter: blur(20px) saturate(180%);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	background: rgba(255, 255, 255, 0.015);
+	backdrop-filter: blur(28px) saturate(200%);
+	-webkit-backdrop-filter: blur(28px) saturate(200%);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 	box-shadow: 
-		inset 0 -1px 0 rgba(255, 255, 255, 0.03),
-		0 4px 24px rgba(0, 0, 0, 0.2);
+		inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+		0 4px 24px rgba(0, 0, 0, 0.3);
 	flex-shrink: 0;
 }
 
@@ -622,20 +623,20 @@
 	font-weight: 500;
 	font-family: var(--font-sans);
 	color: var(--text-muted);
-	/* [LIQUID GLASS] Botón glass con borde sutil */
-	background: rgba(255, 255, 255, 0.04);
-	backdrop-filter: blur(12px);
-	-webkit-backdrop-filter: blur(12px);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	/* [LIQUID GLASS] Botón — MÁS TRANSPARENTE */
+	background: rgba(255, 255, 255, 0.02);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 	cursor: pointer;
 	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 	white-space: nowrap;
 }
 .logout-btn:hover {
-	background: rgba(225, 29, 72, 0.1);
+	background: rgba(225, 29, 72, 0.08);
 	color: var(--color-crimson-200);
-	border-color: rgba(225, 29, 72, 0.3);
+	border-color: rgba(225, 29, 72, 0.25);
 }
 
 @media (max-width: 479px) { .logout-label { display: none; } }
