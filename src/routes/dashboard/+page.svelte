@@ -115,46 +115,58 @@
 	gap: 0.75rem;
 }
 
-/* ── Card ───────────────────────────────────────────────────────────────── */
+/* ── Card — LIQUID GLASS iOS 26 ─────────────────────────────────────────── */
 .card {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	padding: 1.125rem 1.125rem 1rem;
-	border-radius: 0.625rem;
-	background: var(--color-coal);
-	border: 1px solid rgba(255, 255, 255, 0.06);
+	padding: 1.25rem;
+	border-radius: 1rem;
+	/* Liquid Glass effect */
+	background: rgba(255, 255, 255, 0.04);
+	backdrop-filter: blur(20px) saturate(180%);
+	-webkit-backdrop-filter: blur(20px) saturate(180%);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: 
+		inset 0 1px 0 rgba(255, 255, 255, 0.1),
+		0 8px 32px rgba(0, 0, 0, 0.4);
 	text-decoration: none;
-	transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+	transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-	border-color: rgba(180, 20, 41, 0.25);
-	background: var(--color-graphite);
-	transform: translateY(-1px);
+	transform: translateY(-3px);
+	border-color: rgba(225, 29, 72, 0.3);
+	box-shadow: 
+		inset 0 1px 0 rgba(255, 255, 255, 0.15),
+		0 16px 48px rgba(0, 0, 0, 0.5),
+		0 0 40px -10px rgba(225, 29, 72, 0.15);
 }
 
 .card:hover .card-arrow {
 	color: var(--color-crimson-400);
-	transform: translateX(2px);
+	transform: translateX(3px);
 }
 
 .card-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 0.25rem;
+	margin-bottom: 0.375rem;
 }
 
 .card-icon {
 	display: flex;
-	width: 1.875rem;
-	height: 1.875rem;
+	width: 2.25rem;
+	height: 2.25rem;
 	align-items: center;
 	justify-content: center;
-	border-radius: 0.375rem;
-	background: rgba(180, 20, 41, 0.1);
+	border-radius: 0.625rem;
+	/* Glass icon container */
+	background: rgba(225, 29, 72, 0.12);
+	border: 1px solid rgba(225, 29, 72, 0.2);
 	color: var(--color-crimson-400);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .card-icon svg {
